@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+				
+		</style>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+				margin-top: 50px;
+				float: left;
+				font-size: 6px;
+				padding-left: 30px;
+			}
+			.data_div  ul li:nth-child(2n+1) {
+				    width: 100%;
+				    background: #F8EFC0;
+				}
+			.data_div  ul li:nth-child(2n) {
+				    width: 100%;
+				    background:#204D74;
+				
+				}
+			.data_div  ul li:nth-child(3n) {
+				    width: 100%;
+				    background:red;
+				
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">数据</h1>
+		</header>
+		<div class="data_div">
+			<ul class="data1" v-for="item in list">
+				<li>{{item.name}}</li>
+				<li v-for="(it,index) in item.message">{{it}}</li>
+			</ul>
+			
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript" src="js/JQ/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="js/js/vue.js" ></script>
+		<script type="text/javascript" src="js/vue-resource.js" ></script>
+		<script>
+			new Vue({
+				el:".data_div",
+				data:{
+					list:[{
+						name:"ItemCode",
+						message:[],
+					},{
+						name:"ItemName",
+						message:[],
+
+					},{
+						name:"StanderdName",
+						message:[],
+					},{
+						name:"UnitPrice",
+						message:[],
+						
+					},{
+						name:"FirstLetter",
+						message:[],
+					},{
+						name:"ClientItemCode",
+						message:[],
+						
+					}],
+				},
+				methods:{
+					
+					
+				},
+				mounted:function(){
+					this.$http.get("/apis/api/IPAddress/GetItemMaster").then(function(obj){
+						
+						for (i=0;i<obj.data.length;i++) {
+							this.list[0].message.push(obj.data[i].ItemCode);
+							this.list[1].message.push(obj.data[i].ItemName);
+							this.list[2].message.push(obj.data[i].StanderdName);
+							this.list[3].message.push(obj.data[i].UnitPrice);
+							this.list[4].message.push(obj.data[i].FirstLetter);
+							this.list[5].message.push(obj.data[i].ClientItemCode);
+						}
+					})
+				}
+			})
+		</script>
+	
+	</body>
+
+</html>

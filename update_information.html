@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-table-view{
+				margin-top: 3em;
+			}
+			#spanId{
+				margin-left: 50%;				
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">个人资料</h1>
+		</header>
+		<ul class="mui-table-view">
+		        <li class="mui-table-view-cell">
+		            <a class="mui-navigate-right" id="userId">
+		                账号	
+		                <span id="spanId"></span>
+		            </a>
+		            
+		        </li>
+		        <li class="mui-table-view-cell">
+		            <a class="mui-navigate-right" id="userName">
+		                 昵称
+		                 <span id="spanId"></span>
+		            </a>
+		        </li>
+		        <li class="mui-table-view-cell">
+		            <a class="mui-navigate-right" id="userEmail">
+		                 邮箱
+		                 <span id="spanId"></span>
+		            </a>
+		        </li>
+		    </ul>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script>
+				var userId=document.getElementById("userId");
+				var userName=document.getElementById("userName");
+				var userEmail=document.getElementById("userEmail");
+				mui.ajax("/login/api/IPAddress/GetUserInfo",{
+					data:{
+						userID:"舍弗勒"
+					},
+					type:"get",
+					dataType:"json",
+					success:function(obj){
+						userId.innerHTML=obj[0].UserID;
+						userName.innerHTML=obj[0].UserName;
+						userEmail.innerHTML=obj[0].UserEmail;
+					}
+				});
+				
+
+		</script>
+		<script>
+			
+			/*$(function(){
+				$.ajax({
+					type:"get",
+					url:"/login/api/IPAddress/GetUserInfo",
+					async:true,
+					data:"userID=舍弗勒",
+					dataType:"json",
+					success:function(obj){
+						//alert(obj[0].UserID);
+					}
+				});
+			})*/
+		</script>
+	</body>
+
+</html>

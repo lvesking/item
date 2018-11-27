@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.main{
+				margin-top: 4em;
+				display: block
+			}
+		</style>
+	</head>
+		
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">获取数据</h1>
+		</header>
+		<div class="main">
+			<div class="mui-content">
+			    <input type="text" id="scan1"	  />
+			</div>
+			<div class="mui-content">
+			    <input type="text" id="scan2" 	  />
+			</div>
+			<div class="mui-content">
+			    <input type="text"  id="scan3"    />
+			</div>
+			<div class="mui-content">
+			    <input type="text"  id="scan4" 		 />
+			</div>
+			<button type="button" class="mui-btn" id="btnScan">扫一扫</button>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript" src="js/JQ/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="js/js/vue.js" ></script>
+	</body>
+	<script>
+		$(function(){
+			$.ajax({
+			   	url:"/login/api/IPAddress/LogSys",
+			   	data:{
+			   		UserID:"200880",
+			   		Password:"888888",
+			   		Remark:"54132",
+			   	},
+			   	type:"post",
+			   	dataType:"json",
+			   	success:function(obj){
+			   	//	alert(obj.VendorFilter);
+			   	},
+				error:function(e){
+				//	alert(e);
+				}
+				
+			});
+			
+			
+			
+		})
+	
+	
+ 	</script>
+	
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style>
+			.welcome{
+				text-align: center;
+				font-family: "微软雅黑";
+				font-size: 3em;
+				color: red;
+				letter-spacing: 0.5em;
+				margin-left: 0.5em;
+			}
+			.user{
+				margin-left: 2em;
+				font-family: "微软雅黑";
+				font-size: 1.4em;
+			}
+			a{
+				text-decoration: none;
+				color: red;
+			}
+		</style>
+	</head>
+	
+
+	<body>
+		<header>
+			<div class="welcome">
+				<p>欢迎注册</p>
+			</div>
+		</header>
+		<div class="user">
+			<p>您的账号为:<span id="userID"></span></p>
+			<p>请记住此账号，凭此账号<a href="http://192.168.0.109/item/login.html">登录</a></p>
+		</div>
+		<script type="text/javascript" src="js/JQ/jquery-3.1.1.min.js" ></script>
+		<script>
+			$(function(){
+				var values=location.href;
+    			var str=values.split("=")[1];
+    			if(!str){
+    				return;
+    			}
+				$.ajax({
+					type:"get",
+					url:"/login/api/IPAddress/GetUserInfo",
+					async:true,
+					data:"userID="+str,
+					success:function(obj){
+						$("#userID").html(obj[0].UserID);
+					}
+					
+				});
+				
+				
+			})
+		</script>
+	</body>
+
+</html>

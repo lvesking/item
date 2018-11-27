@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<link rel="stylesheet" href="js/css/reserve.css" />
+		<script type="text/javascript" src="js/js/vue.js" ></script>
+		<script type="text/javascript" src="js/JQ/jquery-3.1.1.min.js" ></script>
+	</head>
+
+	<body>
+					<header class="mui-bar mui-bar-nav">
+					    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					    <h1 class="mui-title">扫描数据</h1>
+					</header>
+					<div class="main">
+						<div class="scannerText">
+								<input type="text" value="" id="parmdata" ref="parmdata" readonly="readonly" v-show='inportdata'/>
+								<input  type="text"  id="parmdata" v-show='!inportdata' ref="input"/>
+								<button id="btnScanner"><a href="scanner.html">扫一扫</a></button>
+						</div>
+						<div class="btndata">
+								<input id="confirm" type="button" value="确定" v-on:click="load()" v-show='inportdata'/>
+								<input id="confirm" type="button" value="确定" v-on:click="addtodo()" v-show='!inportdata'/>
+								<input type="button" name="btn" id="btn" value="提交"/>
+								<button v-on:click="cleartodo()">清空</button>
+						</div>
+						<ul>
+							<li v-for="item in list">
+								<div id="reserve">
+									<p id="load" >{{item.title}}</p>
+									<p id="todo" >{{item.todo}}</p>
+								</div>
+							</li>
+
+						<div class="list_length">
+							<p>共{{list.length}}条</p>
+						</div>
+					</div>
+	</body>
+	<script>
+		var store={
+			save:function(key,value){
+				localStorage.setItem(key,JSON.stringify(value));
+			},
+			fetch:function(key){
+				return JSON.parse(localStorage.getItem(key))||[];
+			},
+			removelist:function(){
+				return localStorage.clear();
+			}
+		}
+		
+		var values=location.href;
+    	var str=values.split("=")[1];
+    
+    	
+		var list=store.fetch("data-class");
+		new Vue({
+			el:".main",
+			data:{
+				list:list,
+				inportdata:str,
+			},
+			methods:{
+				load:function(ev){
+						this.list.push({
+							title:str
+						})
+					this.inportdata=''
+				},
+				addtodo:function(ev){
+					this.list.push({
+						todo:this.$refs.input.value
+					})
+					this.$refs.input.value=""
+				},
+				cleartodo:function(){
+					store.removelist();
+					location.href="reserve.html";
+					
+				},
+			/*	reload:function(){
+					this.isRouterAlive=false;
+					this.$nextTick(function(){
+						this.isRouterAlive=true;
+					})
+					
+				}*/ 
+				
+			},
+			watch:{
+				list:function(){
+					store.save("data-class",this.list);
+				},
+			},
+			mounted:function(){
+				$("#parmdata").val(str);
+				this.$refs.parmdata.value=str;
+			}
+		})
+	</script>
+
+</html>

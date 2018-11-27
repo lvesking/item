@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>导航栏</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="js/css/bootstrap.min.css" />
+		<style>
+			.back{
+				float: left;
+				margin-top: 1.2em;
+				color: #007AFF;
+			}
+		</style>
+	</head>
+	<body>
+			<nav class="navbar navbar-default" role="navigation">
+			  <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header container">
+			  	<span class="glyphicon glyphicon-chevron-left back"></span>
+			  	
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
+			    
+			    <a class="navbar-brand" href="http://192.168.0.109/item/index.html">数据管理</a>
+			  </div>
+			
+			  <!-- Collect the nav links, forms, and other content for toggling -->
+			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			    
+			    
+			    <ul class="nav navbar-nav navbar-right">
+			    	<li><a href="scanner.html" class="navbar-link hidden-lg">扫一扫</a></li>
+			        <li><a href="#" class="navbar-link">注销</a></li>
+					<li><a href="getData.html" class="navbar-link">获取数据</a></li>
+
+			    </ul>
+			  </div><!-- /.navbar-collapse -->
+		</nav>
+		<div class="container-fluid">
+	        <div class="row">
+	            <div class="col-sm-2">
+	                    <li class="active">
+	                        <a href="index.html">
+	                            <i class="glyphicon glyphicon-th-large"></i>
+	                            首页
+	                        </a>
+	                    </li>
+	                
+	                <ul id="main-nav" class="nav nav-tabs nav-stacked"  v-for="item in items">
+	                    <li>
+	                        <a v-bind:href="item.sid" class="nav-header collapsed" data-toggle="collapse">
+	                            <i class="glyphicon glyphicon-cog"></i>
+	                            {{item.name}}
+	                            <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+	                        </a>
+	                        <ul v-bind:id="item.id" class="nav nav-list collapse secondmenu" style="height: 0px;">
+	                            <li v-for="message in item.message"><a :href="message.urlAddress"><i class="glyphicon glyphicon-user"></i>{{message.name}}</a></li>
+	                        </ul>
+	                    </li>
+	                </ul>
+	               
+	            </div>
+	        </div>
+  	 </div>
+		
+		<script type="text/javascript" src="js/JQ/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/js/vue.js" ></script>
+		<script>
+			new Vue({
+				el:".container-fluid",
+				data:{
+						items:[
+						{
+							name:"数据管理",
+							message:[{
+								name:"数据管理",
+								urlAddress:"http://192.168.0.109/item/databases.html"
+							},{
+								name:"数据修改"
+							},{
+								name:"预览数据"
+							}],
+							id:"dataSetting",
+							sid:"#dataSetting",
+						},{
+							name:"信息管理",
+							message:[{
+								name:"修改密码"
+							},{
+								name:"修改信息"
+							}],
+							id:"messageSetting",
+							sid:"#messageSetting"
+							
+						},{
+							name:"角色管理",
+							message:[{
+								name:"权限管理"
+							}],
+							id:"roleSetting",
+							sid:"#roleSetting"
+						},{
+							name:"交易记录",
+							message:[{
+								name:"交易支出"
+							},{
+								name:"总支出"
+							},{
+								name:"余额"
+							}],
+							id:"dealSetting",
+							sid:"#dealSetting"
+						}
+						]
+				},
+				mounted:function(){
+					console.log(123)
+				}
+			});
+		</script>
+		<script>
+			$(".back").on("click",function(){
+				history.back(-1);
+			})
+		</script>
+	</body>
+</html>

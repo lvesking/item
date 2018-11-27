@@ -1,0 +1,77 @@
+{
+  "main.html": {
+    "resources": [
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "setting.html",
+      "index.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "images/sinaweibo.png",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/weixin.png",
+      "images/qq.png"
+    ],
+    "refer": [
+      "main.html",
+      "reg.html",
+      "unlock.html"
+    ]
+  },
+  "setting.html": {
+    "resources": [
+      "css/mui.min.css"
+    ]
+  },
+  "reg.html": {
+    "resources": [
+      "css/mui.min.css",
+      "css/style.css"
+    ],
+    "refer": [
+      "login.html"
+    ]
+  },
+  "index.html": {
+    "resources": [
+      "js/css/bootstrap.min.css"
+    ],
+    "refer": [
+      "scanner.html",
+      "main.html",
+      "getData.html",
+      "databases.html"
+    ]
+  },
+  "reserve.html": {
+    "resources": [
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "reserve.html",
+      "scanner.html"
+    ]
+  },
+  "scanner.html": {
+    "refer": [
+      "reserve.html",
+      "index.html",
+      "getData.html"
+    ]
+  },
+  "getData.html": {
+    "refer": [
+      "index.html",
+      "scanner.html"
+    ]
+  },
+  "databases.html": {
+    "refer": [
+      "index.html"
+    ]
+  }
+}
